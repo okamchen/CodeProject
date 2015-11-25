@@ -3,14 +3,17 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use CodeProject\Http\Requests;
-use CodeProject\Http\Controllers\Controller;
-
-use CodeProject\Client;
+use CodeProject\Services\ClientService;
 
 class ClientController extends Controller
 {
+    private $service;
+
+    public function __construct(ClientService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +21,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::all();
+        return $this->service->all();
     }
 
     
@@ -30,7 +33,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        return Client::create($request->all());
+        return $this->service->create($request->all());
     }
 
     /**
@@ -41,7 +44,7 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        return Client::find($id);
+        return $this->service->show($id);
     }
 
     /**
@@ -53,7 +56,8 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Client::find($id)->update($request->all());
+        // Client::find($id)->update($request->all());
+        return $this->service->update($request->all(), $id);
     }
 
     /**
@@ -64,6 +68,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find()->delete();
+        return $this->service->destroy($id);
     }
 }
