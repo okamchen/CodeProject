@@ -3,13 +3,13 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeProject\Services\ClientService;
+use CodeProject\Services\ProjectService;
 
-class ClientController extends Controller
+class ProjectController extends Controller
 {
     private $service;
 
-    public function __construct(ClientService $service)
+    public function __construct(ProjectService $service)
     {
         $this->service = $service;
     }

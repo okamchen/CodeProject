@@ -6,12 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    protected $fillable = [
-    	'name',
-    	'responsible',
-    	'email',
-    	'phone',
-    	'address',
-    	'obs'
-    ];
+	
+	/**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+	protected $table = 'clients';
+
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'responsible', 'email', 'phone', 'address', 'obs'];
+
 }
