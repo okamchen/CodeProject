@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeProject\Project;
+namespace CodeProject\Repositories;
 
 use CodeProject\Entities\Project;
 use CodeProject\Repositories\ProjectRepository;

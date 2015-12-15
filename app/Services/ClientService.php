@@ -56,4 +56,9 @@ class ClientService
 	{
 		return $this->repository->find($id);
 	}
+
+	public function all()
+	{
+		return $this->repository->all();
+	}
 }

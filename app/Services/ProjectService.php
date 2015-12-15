@@ -56,4 +56,12 @@ class ProjectService
 	{
 		return $this->repository->find($id);
 	}
+
+	public function all()
+	{
+		$projects = $this->repository->all();
+		$projects = $projects->load('client');
+		$projects = $projects->load('owner');
+		return $projects;
+	}
 }
