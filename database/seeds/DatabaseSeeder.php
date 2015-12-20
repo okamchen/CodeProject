@@ -15,8 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        //Desativa a verificação de chaves estrangeiras, isto irá permitir o truncate  
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         // $this->call(UserTableSeeder::class);
         $this->call(ClientTableSeeder::class);
+
+        
+        //Habilitamos novamente a verificação de chaves estrangeiras
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         Model::reguard();
     }
