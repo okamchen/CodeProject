@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UserTableSeeder::class);
         $this->call(ClientTableSeeder::class);
+        $this->call(ProjectTableSeeder::class);
 
         
         //Habilitamos novamente a verificação de chaves estrangeiras
