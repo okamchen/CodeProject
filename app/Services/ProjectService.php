@@ -4,18 +4,21 @@ namespace CodeProject\Services;
 
 use CodeProject\Repositories\ProjectRepository;
 use CodeProject\Validators\ProjectValidator;
+use CodeProject\Repositories\ProjectMemberRepository;
+use CodeProject\Validators\ProjectMemberValidator;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ProjectService
 {
 	protected $repository;
 	protected $validator;
+	protected $validatorMember;
 
-
-	public function __construct(ProjectRepository $repository, ProjectValidator $validator)
+	public function __construct(ProjectRepository $repository, ProjectValidator $validator, ProjectMemberValidator $validatorMember)
 	{
 		$this->repository = $repository;
 		$this->validator = $validator;
+		$this->validatorMember = $validatorMember;
 	}
 
 	public function create(array $data)
@@ -64,5 +67,44 @@ class ProjectService
 		$projects = $this->repository->all();
 		$projects = $projects->load('client', 'owner');
 		return $projects;
+	}
+
+
+	public function addMember(array $membersIds, $projectId)
+	{
+
+		try{
+			$this->validatorMember->with($membersIds)->passesOrFail();
+			$project = $this->repository->find($projectId);
+			$project->users()->attach($membersIds);
+
+			return $project;
+		}catch (ValidatorException $e){
+			return [
+				'error' => true,
+				'message' => $e->getMessageBag()
+			];
+		}
+		
+	}
+
+
+	public function removeMember($projectId, $memberId)
+	{
+		$project = $this->repository->find($projectId);
+		return $project->users()->detach($memberId);
+	}
+
+	public function isMember($projectId, $memberId)
+	{
+
+		$project = $this->repository->find($projectId);
+		// $member = $project->members()->fidn($id_do_membro);
+		
+		if($project != null){
+			return ['isMember' => 'true'];
+		}
+		return ['isMember' => 'false'];
+		
 	}
 }

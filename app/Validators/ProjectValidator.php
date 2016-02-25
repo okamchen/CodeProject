@@ -8,8 +8,9 @@ class ProjectValidator extends LaravelValidator
 {
 
 	protected $rules = [
-		'name' => 'required|max:255',
-		'description' => 'required|max:255',
+		'owner_id' => 'required|integer',
+		'client_id' => 'required|integer',
+		'name' => 'required',
 		'progress' => 'required',
 		'status' => 'required',
 		'due_date' => 'required'
