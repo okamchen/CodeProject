@@ -28,7 +28,9 @@
         "CodeProject\\Providers\\EventServiceProvider",
         "CodeProject\\Providers\\RouteServiceProvider",
         "Prettus\\Repository\\Providers\\RepositoryServiceProvider",
-        "CodeProject\\Providers\\CodeProjectRepositoryProvider"
+        "CodeProject\\Providers\\CodeProjectRepositoryProvider",
+        "LucaDegasperi\\OAuth2Server\\Storage\\FluentStorageServiceProvider",
+        "LucaDegasperi\\OAuth2Server\\OAuth2ServerServiceProvider"
     ],
     "eager": [
         "Illuminate\\Auth\\AuthServiceProvider",
@@ -47,7 +49,9 @@
         "CodeProject\\Providers\\EventServiceProvider",
         "CodeProject\\Providers\\RouteServiceProvider",
         "Prettus\\Repository\\Providers\\RepositoryServiceProvider",
-        "CodeProject\\Providers\\CodeProjectRepositoryProvider"
+        "CodeProject\\Providers\\CodeProjectRepositoryProvider",
+        "LucaDegasperi\\OAuth2Server\\Storage\\FluentStorageServiceProvider",
+        "LucaDegasperi\\OAuth2Server\\OAuth2ServerServiceProvider"
     ],
     "deferred": {
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
