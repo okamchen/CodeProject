@@ -12,7 +12,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+         User::truncate();
+
+        factory(User::class)->create([
+            'name' => 'Oelton',
+            'email' => 'oelton.kamchen@gmail.com',
+            'password' => bcrypt(123456),
+            'remember_token' => str_random(10),
+        ]);
         factory(User::class,10)->create();
     }
 }
