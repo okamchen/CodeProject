@@ -107,4 +107,5 @@ class ProjectService
 		return ['isMember' => 'false'];
 		
 	}
+
 }

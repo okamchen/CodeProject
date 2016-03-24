@@ -4,14 +4,17 @@ namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
 use CodeProject\Services\ProjectService;
+use CodeProject\repositories\ProjectRepositoryEloquent;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class ProjectController extends Controller
 {
     private $service;
 
-    public function __construct(ProjectService $service)
+    public function __construct(ProjectService $service, ProjectRepositoryEloquent $repository)
     {
         $this->service = $service;
+        $this->repository = $repository;
     }
 
     /**
@@ -44,7 +47,12 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        return $this->service->show($id);
+        $userId = Authorizer::getResourceOwnerId();
+        if($this->repository->isOwner($id, $userId)){
+            return $this->service->show($id);
+        }else{
+            return ['sucess' => false];
+        }
     }
 
     /**

@@ -29,8 +29,9 @@ Route::group(['middleware' => 'oauth'], function(){
 	// Route::delete('client/{id}', 'ClientController@destroy');
 	// Route::put('client/{id}', 'ClientController@update');
 
+	Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);
+
 	Route::group(['prefix' => 'project'], function(){
-		Route::resource('', 'ProjectController', ['except' => ['create', 'edit']]);
 
 		Route::get('{id}/note', 'ProjectNoteController@index');
 		Route::get('{id}/note/{noteId}', 'ProjectNoteController@show');
