@@ -29,7 +29,11 @@ Route::group(['middleware' => 'oauth'], function(){
 	// Route::delete('client/{id}', 'ClientController@destroy');
 	// Route::put('client/{id}', 'ClientController@update');
 
-	Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);
+	Route::group(['middleware'=>'CheckProjectOwner'], function(){
+		Route::resource('project', 'ProjectController', ['except' => ['create', 'edit']]);
+	});
+
+	
 
 	Route::group(['prefix' => 'project'], function(){
 

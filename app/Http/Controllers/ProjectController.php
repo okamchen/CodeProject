@@ -47,12 +47,12 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $userId = Authorizer::getResourceOwnerId();
-        if($this->repository->isOwner($id, $userId)){
+        // $userId = Authorizer::getResourceOwnerId();
+        // if($this->repository->isOwner($id, $userId)){
             return $this->service->show($id);
-        }else{
-            return ['sucess' => false];
-        }
+        // }else{
+        //     return ['sucess' => false];
+        // }
     }
 
     /**
