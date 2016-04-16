@@ -99,7 +99,6 @@ class ProjectService
 	{
 
 		$project = $this->repository->find($projectId);
-		// $member = $project->members()->fidn($id_do_membro);
 		
 		if($project != null){
 			return ['isMember' => 'true'];
