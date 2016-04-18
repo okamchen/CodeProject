@@ -58,14 +58,14 @@ class ProjectService
 	public function show($id)
 	{
 		$project = $this->repository->find($id);
-		$project = $project->load('client', 'owner');
+		// $project = $project->load('client', 'owner');
 		return $project;
  	}
 
 	public function all()
 	{
 		$projects = $this->repository->all();
-		$projects = $projects->load('client', 'owner');
+		// $projects = $projects->load('client', 'owner');
 		return $projects;
 	}
 

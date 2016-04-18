@@ -49,7 +49,7 @@ class ProjectController extends Controller
     public function show($id)
     {
 
-        if($this->checkProjectPermissions($id)){
+        if($this->checkProjectPermissions($id) == false){
             return ['erro' => 'Access forbidden'];
         }
 
