@@ -114,13 +114,5 @@ class ProjectService
 		return ['isMember' => 'false'];
 		
 	}
-
-	public function createFile(array $data)
-	{
-		$project = $this->repository->skipPresenter()->find($data['project_id']);
-		$projectFile = $project->files()->create($data);
-
-		$this->storage->put($projectFile->name.".".$data['extension'], $this->filesystem->get($data['file']));
-	}
-
+	
 }

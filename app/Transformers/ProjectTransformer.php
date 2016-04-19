@@ -29,4 +29,5 @@ class ProjectTransformer extends TransformerAbstract
 	{
 		return $this->collection($project->members, new ProjectMemberTransformer());
 	}
+
 }

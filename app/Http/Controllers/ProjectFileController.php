@@ -3,8 +3,8 @@
 namespace CodeProject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use CodeProject\Services\ProjectService;
-use CodeProject\repositories\ProjectRepositoryEloquent;
+use CodeProject\Services\ProjectFileService;
+use CodeProject\Repositories\ProjectFileRepository;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 use File;
@@ -12,31 +12,15 @@ use File;
 class ProjectFileController extends Controller
 {
     private $service;
+    private $repository;
 
-    public function __construct(ProjectService $service, ProjectRepositoryEloquent $repository)
+    public function __construct(ProjectFileService $service, ProjectFileRepository $repository)
     {
         $this->service = $service;
         $this->repository = $repository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return $this->repository->findWhere(['owner_id' => Authorizer::getResourceOwnerId()]);
-        // return $this->service->all();
-    }
-
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store($projectId, Request $request)
     {
 
@@ -48,83 +32,13 @@ class ProjectFileController extends Controller
         $data['project_id'] = $projectId;
         $data['description'] = $request->description;
 
-        $this->service->createFile($data);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-        if($this->checkProjectPermissions($id) == false){
-            return ['erro' => 'Access forbidden'];
-        }
-
-        return $this->service->show($id);
+        return $this->service->createFile($data);    
         
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // Client::find($id)->update($request->all());
-        $this->service->update($request->all(), $id);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $this->service->destroy($id);
-    }
-
-    public function addMember($projectId, Request $request)
-    {
-        return $this->service->addMember($request->all(), $projectId);
-    }
-
-    public function removeMember($id, $memberId)
-    {
-        return $this->service->removeMember($id, $memberId);
-    }
-
-    public function isMember($id, $memberId)
-    {
-        return $this->service->isMember($id, $memberId);
-    }
-
-    private function checkProjectOwner($projectId)
-    {
-        $userId = Authorizer::getResourceOwnerId();
-
-        return $this->repository->isOwner($projectId, $userId);
-    }
-
-    private function checkProjectMember($projectId)
-    {
-        $userId = Authorizer::getResourceOwnerId();
-
-        return $this->repository->hasMember($projectId, $userId);
-    }
-
-    private function checkProjectPermissions($projectId)
-    {
-        return $this->checkProjectOwner($projectId) or
-            $this->checkProjectMember($projectId);
+    public function destroy($projecId, $fileName)
+    { 
+        return $this->service->removeFile($projecId, $fileName);
     }
 
 }
