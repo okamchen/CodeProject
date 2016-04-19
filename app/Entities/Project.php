@@ -7,6 +7,7 @@ use CodeProject\Entities\Client;
 use CodeProject\Entities\User;
 use CodeProject\Entities\ProjectNote;
 use CodeProject\Entities\ProjectTask;
+use CodeProject\Entities\ProjectFile;
 
 
 class Project extends Model
@@ -48,5 +49,10 @@ class Project extends Model
 	{
 		return $this->belongsToMany(User::class , 'project_members', 'project_id', 'member_id');
 																	//join, relação
+	}
+
+	public function files()
+	{
+		return $this->hasMany(ProjectFile::class);
 	}
 }
