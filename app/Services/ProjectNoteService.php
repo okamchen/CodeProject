@@ -52,10 +52,9 @@ class ProjectNoteService
 		return $this->repository->find($id)->delete();
 	}
 
-	public function show($id)
+	public function show($id, $noteId)
 	{
-		$projectNote = $this->repository->find($id);
-		$projectNote = $projectNote->load('project');
+		$projectNote = $this->repository->findWhere(['project_id' => $id, 'id' => $noteId])->first();
 		return $projectNote;
  	}
 

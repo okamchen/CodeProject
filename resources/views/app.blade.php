@@ -81,8 +81,27 @@
 		<script type="text/javascript" src="{{ asset('build/js/vendor/angular-oauth2.min.js') }}"></script>
 
 		<script type="text/javascript" src="{{ asset('build/js/app.js') }}"></script>
+
+		<!-- CONTROLLERS APP-->
 		<script type="text/javascript" src="{{ asset('build/js/controllers/login.js') }}"></script>		
 		<script type="text/javascript" src="{{ asset('build/js/controllers/home.js') }}"></script>
+
+		<!-- CONTROLLERS CLIENT-->
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientList.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientNew.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientEdit.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/client/clientRemove.js') }}"></script>
+		
+		<!-- CONTROLLERS PROJECT NOTES-->
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project-notes/projectNoteList.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project-notes/projectNoteNew.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project-notes/projectNoteEdit.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/controllers/project-notes/projectNoteRemove.js') }}"></script>
+		
+		<!-- SERVICES -->
+		<script type="text/javascript" src="{{ asset('build/js/services/client.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('build/js/services/projectNote.js') }}"></script>		
+
 	@else
 		<script type="text/javascript" src="{{ elixir('js/all.js') }}"></script>
 	@endif
